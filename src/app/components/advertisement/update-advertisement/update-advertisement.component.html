@@ -1,0 +1,19 @@
+<div mat-dialog-content
+  style="height: 170px;">
+  <p>Update</p>
+  <mat-form-field appearance="outline">
+    <mat-label>Cost Per Impression</mat-label>
+    <input matInput
+      #box
+      name="cost_per_impression"
+      value={{this.data.cost_per_impression}}>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button
+      mat-dialog-close>No Thanks</button>
+    <button mat-button
+      mat-dialog-close
+      (click)="onSubmit(box.value)"
+      cdkFocusInitial>Ok</button>
+  </div>
+</div>

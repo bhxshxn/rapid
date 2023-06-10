@@ -1,0 +1,133 @@
+<mat-card style="margin: 20px">
+  <mat-card-content>
+    <mat-card-title>Create</mat-card-title>
+    <form [formGroup]="createForm"
+      (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a Adveatiser</mat-label>
+        <mat-select formControlName="adveatiser_Id">
+          <mat-option *ngFor="let adveatiser of adveatisersData"
+            [value]="adveatiser.id">
+            {{ adveatiser.personal_name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput
+          type="text"
+          formControlName="title"
+          placeholder="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Costper Impression</mat-label>
+        <input matInput
+          type="number"
+          formControlName="cost_per_impression"
+          placeholder="Costper Impression" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Link</mat-label>
+        <input matInput
+          type="text"
+          formControlName="link"
+          placeholder="Link" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Video Link</mat-label>
+        <input matInput
+          type="text"
+          formControlName="video_link"
+          placeholder="Video Link" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Type Of Add</mat-label>
+        <mat-select formControlName="type_of_add"
+          (selectionChange)="onTypeChange($event)">
+          <mat-option value="article_logo">Article Logo</mat-option>
+          <mat-option value="single_image">Single Image</mat-option>
+          <mat-option value="magazine_image">Magazine image</mat-option>
+          <mat-option value="youtube_video">Youtube Video</mat-option>
+          <mat-option value="custom_video">Custom Video</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput
+          type="text"
+          formControlName="description"
+          placeholder="Description" />
+      </mat-form-field>
+
+      <div *ngIf="single_imageShow"
+        class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Single Image Upload</label>
+        <input type="file"
+          id="single_image"
+          (change)="onSelectedFileSingal($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <div *ngIf="artical_logoShow"
+        class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Artical Logo Upload</label>
+        <input type="file"
+          id="article_logo"
+          (change)="onSelectedFileSingal($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <div *ngIf="artical_logoShow"
+        class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Image OR Video Upload</label>
+        <input type="file"
+          id="artical_logo_video"
+          (change)="onSelectedFileSingalimageOrvideo($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <div *ngIf="magazine_imageShow"
+        class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Magazine Image Upload</label>
+        <input multiple
+          type="file"
+          id="magazine_image"
+          (change)="onSelectedFileMagazine($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <div *ngIf="youtube_videoShow"
+        class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Image Upload</label>
+        <input type="file"
+          id="youtube_video"
+          (change)="onSelectedFileSingal($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <div *ngIf="custom_videoShow"
+        class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Video And Image Upload</label>
+        <input multiple
+          type="file"
+          id="custom_video"
+          (change)="onSelectedFilecustom_video($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <div class="form-group">
+        <button type="submit"
+          class="btn btn-primary">
+          <span>Create</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

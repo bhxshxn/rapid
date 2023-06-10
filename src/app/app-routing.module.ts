@@ -17,7 +17,12 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ReportComponent } from './components/report/report.component';
 import { AdveatiserComponent } from './components/adveatiser/adveatiser.component';
 import { RechargeComponent } from './components/recharge/recharge.component';
+import { CreateRechargeComponent } from './components/recharge/create-recharge/create-recharge.component';
 import { AdvertisementComponent } from './components/advertisement/advertisement.component';
+import { CreateAdveatiserComponent } from './components/adveatiser/create-adveatiser/create-adveatiser.component';
+import { EditAdveatiserComponent } from './components/adveatiser/edit-adveatiser/edit-adveatiser.component';
+import { ViewAdveatiserComponent } from './components/adveatiser/view-adveatiser/view-adveatiser.component';
+import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
 
 const routes: Routes = [
    { path: '', component: AppComponent, canActivate: [AuthGuard] },
@@ -49,13 +54,44 @@ const routes: Routes = [
       canActivate: [AuthGuard],
    },
    {
+      path: 'adveatiser/create',
+      component: CreateAdveatiserComponent,
+      canActivate: [AuthGuard],
+   },
+   {
+      path: 'adveatiser/edit/:id',
+      component: EditAdveatiserComponent,
+      canActivate: [AuthGuard],
+   },
+
+   {
+      path: 'adveatiser/view/:id',
+      component: ViewAdveatiserComponent,
+      canActivate: [AuthGuard],
+   },
+   {
       path: 'recharge',
       component: RechargeComponent,
       canActivate: [AuthGuard],
    },
    {
+      path: 'recharge/create',
+      component: CreateRechargeComponent,
+      canActivate: [AuthGuard],
+   },
+   {
+      path: 'recharge/edit/:id',
+      component: CreateRechargeComponent,
+      canActivate: [AuthGuard],
+   },
+   {
       path: 'advertisement',
       component: AdvertisementComponent,
+      canActivate: [AuthGuard],
+   },
+   {
+      path: 'advertisement/create',
+      component: CreateAdvertisementComponent,
       canActivate: [AuthGuard],
    },
    { path: '**', redirectTo: '' },

@@ -8,6 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +20,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -50,6 +53,13 @@ import { CardComponent } from './components/card/card.component';
 import { RechargeComponent } from './components/recharge/recharge.component';
 import { AdvertisementComponent } from './components/advertisement/advertisement.component';
 import { AdveatiserComponent } from './components/adveatiser/adveatiser.component';
+import { CreateAdveatiserComponent } from './components/adveatiser/create-adveatiser/create-adveatiser.component';
+import { EditAdveatiserComponent } from './components/adveatiser/edit-adveatiser/edit-adveatiser.component';
+import { ViewAdveatiserComponent } from './components/adveatiser/view-adveatiser/view-adveatiser.component';
+import { CreateRechargeComponent } from './components/recharge/create-recharge/create-recharge.component';
+import { ViewComponent } from './components/advertisement/view/view.component';
+import { UpdateAdvertisementComponent } from './components/advertisement/update-advertisement/update-advertisement.component';
+import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
 
 @NgModule({
    declarations: [
@@ -72,6 +82,13 @@ import { AdveatiserComponent } from './components/adveatiser/adveatiser.componen
       RechargeComponent,
       AdvertisementComponent,
       AdveatiserComponent,
+      CreateAdveatiserComponent,
+      EditAdveatiserComponent,
+      ViewAdveatiserComponent,
+      CreateRechargeComponent,
+      ViewComponent,
+      UpdateAdvertisementComponent,
+      CreateAdvertisementComponent,
    ],
    imports: [
       MatSnackBarModule,
@@ -100,6 +117,12 @@ import { AdveatiserComponent } from './components/adveatiser/adveatiser.componen
       MatDatepickerModule,
       MatNativeDateModule,
       NgChartsModule,
+
+      MatGridListModule,
+
+      MatTabsModule,
+      MatButtonToggleModule,
+      MatDialogModule,
    ],
    providers: [
       AuthService,

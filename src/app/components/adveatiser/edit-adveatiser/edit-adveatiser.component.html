@@ -1,0 +1,84 @@
+<mat-card style="margin: 20px">
+  <mat-card-content style="text-align: center">
+    <mat-card-title>Update Adveatiser</mat-card-title>
+    <form [formGroup]="UpdateForm"
+      (ngSubmit)="UpdateData()">
+      <mat-form-field appearance="outline">
+        <mat-label>Personal Name</mat-label>
+        <input matInput
+          type="text"
+          formControlName="personal_name"
+          placeholder="Personal Name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Company Name</mat-label>
+        <input matInput
+          type="text"
+          formControlName="company_name"
+          placeholder="Company Name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput
+          type="text"
+          formControlName="mobile_number"
+          placeholder="Mobile Number" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Website Link</mat-label>
+        <input matInput
+          type="text"
+          formControlName="website_link"
+          placeholder="Website Link" />
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Optional</mat-label>
+        <input matInput type="text" formControlName="optional_one" placeholder="Any" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Optional</mat-label>
+        <input matInput type="text" formControlName="optional_two" placeholder="Any" />
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Current Balance</mat-label>
+        <input matInput
+          type="text"
+          formControlName="current_balance"
+          placeholder="Current Balance" />
+      </mat-form-field>
+
+      <mat-grid-list cols="2"
+        rowHeight="100px">
+        <mat-grid-tile>
+          <div class="form-group form-row">
+            <label style="margin-left: 10px; margin-right: 20px">Company Logo</label>
+            <input type="file"
+              id="company_logo"
+              (change)="onSelectedFile($event)"
+              style="margin-left: 10" />
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <img mat-card-image
+            src="http://52.66.210.17:3000/uploads/company_logo/{{imageEdit}}"
+            alt="not Found!">
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <div class="form-group">
+        <button mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!UpdateForm.valid">
+          <span>Update</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

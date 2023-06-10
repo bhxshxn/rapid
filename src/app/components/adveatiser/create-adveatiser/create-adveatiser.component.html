@@ -1,0 +1,94 @@
+<mat-card style="margin: 20px">
+  <mat-card-content style="text-align: center;">
+    <mat-card-title>Create</mat-card-title>
+    <form [formGroup]="createForm"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Personal Name</mat-label>
+        <input matInput
+          type="text"
+          formControlName="personal_name"
+          placeholder="Personal Name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Company Name</mat-label>
+        <input matInput
+          type="text"
+          formControlName="company_name"
+          placeholder="Company Name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput
+          type="text"
+          formControlName="mobile_number"
+          placeholder="Mobile Number" />
+        <mat-hint>mobile no only 10 digits required</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Website Link</mat-label>
+        <input matInput
+          type="text"
+          formControlName="website_link"
+          placeholder="Website Link" />
+      </mat-form-field>
+
+      <div class="form-group form-row">
+        <label style="margin-left: 10px; margin-right: 20px;">Company Logo</label>
+        <input type="file"
+          id="company_logo"
+          (change)="onSelectedFile($event)"
+          style="margin-left: 10" />
+      </div>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Company Logo</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="company_logo"
+          placeholder="Logo"
+        />
+      </mat-form-field> -->
+
+      <!-- <mat-form-field appearance="outline">
+         <mat-label>Optional</mat-label>
+         <input
+           matInput
+           type="text"
+           formControlName="optional_one"
+           placeholder="Any"
+         />
+       </mat-form-field>
+
+       <mat-form-field appearance="outline">
+         <mat-label>Optional</mat-label>
+         <input
+           matInput
+           type="text"
+           formControlName="optional_two"
+           placeholder="Any"
+         />
+       </mat-form-field> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Current Balance</mat-label>
+        <input matInput
+          type="text"
+          formControlName="current_balance"
+          placeholder="Current Balance" />
+      </mat-form-field>
+
+      <div class="form-group">
+        <button type="submit"
+          class="btn btn-primary"
+          [disabled]="!createForm.valid">
+          <span>Create</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
