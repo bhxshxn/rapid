@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -74,6 +74,7 @@ import { AdveatiserComponent } from './components/adveatiser/adveatiser.componen
       AdveatiserComponent,
    ],
    imports: [
+      MatSnackBarModule,
       BrowserModule,
       AppRoutingModule,
       NoopAnimationsModule,
