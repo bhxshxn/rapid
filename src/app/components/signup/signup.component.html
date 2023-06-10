@@ -1,0 +1,39 @@
+<div style="margin-top: 10px; margin-left: 20px">
+   <h2>Create User</h2>
+</div>
+
+<div class="container-fluid h-100 bg-light text-dark">
+   <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
+      <mat-form-field>
+         <mat-label>Name</mat-label>
+         <input matInput placeholder="Ex. Jon" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+         <mat-label>Email</mat-label>
+         <input matInput placeholder="Ex. Jon" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field>
+         <mat-label>Password</mat-label>
+         <input
+            matInput
+            type="password"
+            placeholder="Ex. Jon"
+            formControlName="password"
+         />
+      </mat-form-field>
+
+      <mat-form-field>
+         <mat-label>Phone</mat-label>
+         <input matInput placeholder="Phone No" formControlName="phone" />
+      </mat-form-field>
+
+      <button
+         color="accent"
+         [disabled]="!signupForm.valid"
+         mat-raised-button
+         type="submit"
+      >
+         <span>Sign up</span>
+      </button>
+   </form>
+</div>

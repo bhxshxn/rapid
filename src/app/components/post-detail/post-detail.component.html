@@ -1,0 +1,49 @@
+<div class="bootstrap-wrapper">
+   <div class="container">
+      <div class="container">
+         <div class="center">
+            <img
+               src="http://13.126.81.92:3000/uploads/posts/{{ article.image }}"
+               width="40%"
+               height="250px"
+            />
+
+            <br />
+            <div class="row" style="margin-left: 10px">
+               <div class="offset-md-0">
+                  <div class="mat-elevation-z8" style="padding: 20px">
+                     <table cdk-table>
+                        <tr>
+                           <td cdk-cell style="text-align: start">
+                              <strong><b>Headline:</b></strong>
+                           </td>
+                           <td cdk-cell style="text-align: start">
+                              {{ article.headline }}
+                           </td>
+                        </tr>
+
+                        <tr>
+                           <td cdk-cell style="text-align: start">
+                              <strong><b>Article: </b></strong>
+                           </td>
+                           <td cdk-cell style="text-align: start">
+                              {{ article.body }}
+                           </td>
+                        </tr>
+
+                        <tr>
+                           <td cdk-cell style="text-align: start">
+                              <strong><b>Link: </b></strong>
+                           </td>
+                           <td cdk-cell style="text-align: start">
+                              {{ article.link }}
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

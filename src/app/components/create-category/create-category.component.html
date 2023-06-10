@@ -1,0 +1,40 @@
+<div style="margin-top: 10px; margin-left: 20px">
+   <h2>Create Article</h2>
+</div>
+
+<div class="container-fluid h-100 bg-light text-dark">
+   <form [formGroup]="createCategoryForm" (ngSubmit)="onSubmit()">
+      <div class="row col-lg-4">
+         <div class="form-group">
+            <label>Category Name</label>
+            <input
+               type="text"
+               class="form-control"
+               formControlName="name"
+               placeholder="Enter name"
+            />
+            <div
+               *ngIf="name.invalid && (name.dirty || name.touched)"
+               class="error loginerror"
+            >
+               <div class="bg-danger" *ngIf="name.errors">Name Required</div>
+            </div>
+         </div>
+
+         <div class="form-group form-row">
+            <label>Choose image</label>
+            <input type="file" id="image" (change)="onSelectedFile($event)" />
+         </div>
+
+         <div class="form-group">
+            <button
+               type="submit"
+               [disabled]="!createCategoryForm.valid"
+               class="btn btn-primary"
+            >
+               <span>Create</span>
+            </button>
+         </div>
+      </div>
+   </form>
+</div>

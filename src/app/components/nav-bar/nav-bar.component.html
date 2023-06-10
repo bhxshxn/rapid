@@ -1,0 +1,114 @@
+<mat-toolbar id="mainToolbar"
+   color="primary">
+   <mat-icon (click)="onToolbarMenuToggle()"
+      id="toolbarMenu">subject</mat-icon>
+   Rapid
+   <span class="toolbar-spacer"></span>
+</mat-toolbar>
+
+<mat-sidenav-container id="sidenavContainer"
+   fullscreen>
+   <mat-sidenav mode="side"
+      #sidenav
+      id="sidenav"
+      [class.menu-open]="!opened"
+      [class.menu-close]="opened"
+      opened>
+      <mat-list id="menus">
+         <mat-card>
+            <mat-card-header>
+               <div mat-card-avatar
+                  class="avatar"></div>
+
+               <mat-card-title>Admin</mat-card-title>
+               <mat-card-subtitle>Rapid</mat-card-subtitle>
+            </mat-card-header>
+         </mat-card>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/posts">
+               <mat-icon>dashboard</mat-icon>
+               Dashboard
+            </button>
+         </mat-list-item>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/user">
+               <mat-icon>person</mat-icon>
+               User
+            </button>
+         </mat-list-item>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/category">
+               <mat-icon>category</mat-icon>
+               Category
+            </button>
+         </mat-list-item>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/privacy_policy">
+               <mat-icon>map</mat-icon>
+               Privacy Policy
+            </button>
+         </mat-list-item>
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/adveatiser">
+               <mat-icon>add_circle</mat-icon>
+               Adveatiser
+            </button>
+         </mat-list-item>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/recharge">
+               <mat-icon>settings_input_antenna</mat-icon>
+               Recharge
+            </button>
+         </mat-list-item>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/advertisement">
+               <mat-icon>reorder</mat-icon>
+               Advertisement
+            </button>
+         </mat-list-item>
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               routerLink="/report">
+               <mat-icon>map</mat-icon>
+               Report
+            </button>
+         </mat-list-item>
+
+         <mat-list-item>
+            <button class="menu-item"
+               mat-flat-button
+               (click)="logoutUser()">
+               <mat-icon>logout</mat-icon>
+               Logout
+            </button>
+         </mat-list-item>
+      </mat-list>
+   </mat-sidenav>
+
+   <mat-sidenav-content>
+      <mat-selection-list class="dash-list">
+         <router-outlet> </router-outlet>
+      </mat-selection-list>
+   </mat-sidenav-content>
+</mat-sidenav-container>

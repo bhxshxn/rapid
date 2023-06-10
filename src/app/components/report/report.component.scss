@@ -1,0 +1,66 @@
+.flex {
+   display: flex;
+}
+
+.justify-content-center {
+   justify-content: center;
+}
+
+.justify-content-space-evenly {
+   justify-content: space-evenly;
+}
+
+.custom-card {
+   width: 220px;
+   height: 150px;
+   background-color: lightblue;
+   display: flex;
+   /* justify-content: center; */
+   align-items: center;
+}
+
+.custom-header {
+   font-size: 50px;
+   font-weight: 500;
+   color: white;
+}
+
+.custom-paragraph {
+   margin-top: 28px;
+   font-size: 22px;
+   color: white;
+
+}
+
+.gap {
+   gap: 25px;
+}
+
+.container {
+   padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.mt-3 {
+   margin-top: 25px;
+}
+
+@media (min-width: 768px) {
+   .container {
+      width: 580px;
+   }
+}
+
+@media (min-width: 992px) {
+   .container {
+      width: 800px;
+   }
+}
+
+@media (min-width: 1200px) {
+   .container {
+      width: 860px;
+   }
+}
