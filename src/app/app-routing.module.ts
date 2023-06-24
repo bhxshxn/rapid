@@ -23,6 +23,7 @@ import { CreateAdveatiserComponent } from './components/adveatiser/create-adveat
 import { EditAdveatiserComponent } from './components/adveatiser/edit-adveatiser/edit-adveatiser.component';
 import { ViewAdveatiserComponent } from './components/adveatiser/view-adveatiser/view-adveatiser.component';
 import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
+import { General_settingsComponent } from './components/general-settings/general_settings.component';
 
 const routes: Routes = [
    { path: '', component: AppComponent, canActivate: [AuthGuard] },
@@ -92,6 +93,11 @@ const routes: Routes = [
    {
       path: 'advertisement/create',
       component: CreateAdvertisementComponent,
+      canActivate: [AuthGuard],
+   },
+   {
+      path: 'setting',
+      component: General_settingsComponent,
       canActivate: [AuthGuard],
    },
    { path: '**', redirectTo: '' },

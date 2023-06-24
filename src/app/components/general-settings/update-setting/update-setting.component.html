@@ -1,0 +1,28 @@
+<div mat-dialog-content
+  style="height: 260px; overflow: hidden;">
+  <p>Update</p>
+  <form [formGroup]="createForm"
+    (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Advertiser Counter</mat-label>
+      <input matInput
+        type="text"
+        formControlName="advertiser_counter">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Value</mat-label>
+      <input matInput
+        formControlName="value">
+    </mat-form-field>
+    <br>
+    <div class="form-group">
+      <button type="submit"
+        class="btn btn-primary"
+        [disabled]="!createForm.valid">
+        <span>Submit</span>
+      </button>
+    </div>
+  </form>
+</div>

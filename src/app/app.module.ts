@@ -60,7 +60,8 @@ import { CreateRechargeComponent } from './components/recharge/create-recharge/c
 import { ViewComponent } from './components/advertisement/view/view.component';
 import { UpdateAdvertisementComponent } from './components/advertisement/update-advertisement/update-advertisement.component';
 import { CreateAdvertisementComponent } from './components/advertisement/create-advertisement/create-advertisement.component';
-
+import { General_settingsComponent } from './components/general-settings/general_settings.component';
+import { UpdateSettingComponent } from './components/general-settings/update-setting/update-setting.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -89,6 +90,8 @@ import { CreateAdvertisementComponent } from './components/advertisement/create-
       ViewComponent,
       UpdateAdvertisementComponent,
       CreateAdvertisementComponent,
+      General_settingsComponent,
+      UpdateSettingComponent,
    ],
    imports: [
       MatSnackBarModule,
@@ -123,6 +126,8 @@ import { CreateAdvertisementComponent } from './components/advertisement/create-
       MatTabsModule,
       MatButtonToggleModule,
       MatDialogModule,
+      MatFormFieldModule,
+      MatInputModule,
    ],
    providers: [
       AuthService,
