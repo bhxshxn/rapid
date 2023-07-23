@@ -47,6 +47,15 @@
    margin-top: 25px;
 }
 
+.center-button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   margin-bottom: 50px;
+   /* Ensure the button fills the entire height if necessary */
+}
+
 @media (min-width: 768px) {
    .container {
       width: 580px;

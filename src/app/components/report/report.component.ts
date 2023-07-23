@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {
    FormBuilder,
    FormControl,
@@ -6,7 +6,8 @@ import {
    Validators,
 } from '@angular/forms';
 import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
-
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 interface Ads {
    name: string;
 }
@@ -16,6 +17,8 @@ interface Ads {
    styleUrls: ['./report.component.scss'],
 })
 export class ReportComponent implements OnInit {
+   @ViewChild('graphContainer', { static: false }) graphContainer: ElementRef;
+
    public lineChartData: ChartConfiguration<'line'>['data'];
    public lineChartOptions: ChartOptions<'line'>;
    public lineChartLegend: boolean;
@@ -26,22 +29,104 @@ export class ReportComponent implements OnInit {
       },
    };
    constructor(private fb: FormBuilder) {}
-
+   response: any;
    ngOnInit() {
-      this.lineChartData = {
-         labels: [
-            '2022-05-10',
-            '2022-05-11',
-            '2022-05-12',
-            '2022-05-13',
-            '2022-05-14',
-            '2022-05-15',
-            '2022-05-16',
-            '2022-05-17',
+      this.response = {
+         numberOfClicks: {
+            numberOfClicks: 2,
+            avg_cost: 5.699999809265137,
+         },
+         totalImpressions: {
+            impression: 2,
+         },
+         totalCost: {
+            cost: 11.399999618530273,
+            avg_cost: 5.699999809265137,
+         },
+         clickedCount: [
+            {
+               id: 2,
+               cost: 39.89999866485596,
+               ad_id: 11,
+               ad_type: 'custom_video',
+               is_clicked: 1,
+               created_at: '2023-04-16T14:50:34.000Z',
+               avg_cost: 5.699999809265137,
+            },
+            {
+               id: 17,
+               cost: 399.39999198913574,
+               ad_id: 50,
+               ad_type: 'custom_video',
+               is_clicked: 1,
+               created_at: '2023-05-07T12:10:43.000Z',
+               avg_cost: 5.397297189042375,
+            },
          ],
+         impressions: [
+            {
+               id: 1,
+               cost: 34.19999885559082,
+               ad_id: 11,
+               ad_type: 'custom_video',
+               is_clicked: 0,
+               created_at: '2023-04-16T14:34:50.000Z',
+               avg_cost: 5.699999809265137,
+            },
+            {
+               id: 14,
+               cost: 11.399999618530273,
+               ad_id: 50,
+               ad_type: 'custom_video',
+               is_clicked: 0,
+               created_at: '2023-05-03T15:41:49.000Z',
+               avg_cost: 5.699999809265137,
+            },
+            {
+               id: 16,
+               cost: 489.2999906539917,
+               ad_id: 50,
+               ad_type: 'custom_video',
+               is_clicked: 0,
+               created_at: '2023-05-07T12:10:38.000Z',
+               avg_cost: 5.376922974219689,
+            },
+         ],
+      };
+      const filteredClickedCount = this.response.clickedCount.map(item => {
+         return Math.round(item.cost);
+      });
+      const filteredImpressionsCount = this.response.impressions.map(item => {
+         return Math.round(item.cost);
+      });
+
+      const filteredClickedCreated = this.response.clickedCount.map(item => {
+         return item.created_at;
+      });
+      const filteredImpressionsCreated = this.response.clickedCount.map(
+         item => {
+            return item.created_at;
+         },
+      );
+      const mergeCreated = [
+         ...filteredClickedCreated,
+         ...filteredImpressionsCreated,
+      ];
+      console.log(mergeCreated);
+      const formattedDates = mergeCreated.map(date =>
+         new Date(date).toISOString().slice(0, 10),
+      );
+
+      // Step 2: Remove duplicates using Set
+      const uniqueDatesSet = new Set(formattedDates);
+
+      // Step 3: Convert Set back to an array
+      const uniqueDatesArray = Array.from(uniqueDatesSet);
+      this.lineChartData = {
+         labels: uniqueDatesArray,
          datasets: [
             {
-               data: [467, 576, 572, 79, 92, 574, 573, 576],
+               data: filteredImpressionsCount,
                label: 'Impressions',
                fill: true,
                tension: 0,
@@ -49,7 +134,7 @@ export class ReportComponent implements OnInit {
                backgroundColor: 'rgba(255,0,0,0)',
             },
             {
-               data: [542, 542, 536, 327, 17, 0.0, 538, 541],
+               data: filteredClickedCount,
                label: 'Clicks',
                fill: true,
                tension: 0,
@@ -74,4 +159,23 @@ export class ReportComponent implements OnInit {
    ];
    date = new FormControl(new Date());
    serializedDate = new FormControl(new Date().toISOString());
+   captureGraphAsPDF() {
+      // Get the HTML element containing the graph
+      const graphElement = this.graphContainer.nativeElement;
+
+      // Use html2canvas to capture the graph as an image
+      html2canvas(graphElement).then(canvas => {
+         // Convert the canvas to an image data URL
+         const imageDataURL = canvas.toDataURL('image/png');
+
+         // Create a new jsPDF instance
+         const pdf = new jsPDF();
+
+         // Add the captured image to the PDF document
+         pdf.addImage(imageDataURL, 'PNG', 10, 10, 190, 100); // You can adjust the position and size of the image in the PDF
+
+         // Save the PDF
+         pdf.save('graph.pdf');
+      });
+   }
 }

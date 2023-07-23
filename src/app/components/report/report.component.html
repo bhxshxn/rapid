@@ -51,13 +51,13 @@
 <!-- Card portion -->
 <div class="flex justify-content-center gap mt-3">
    <div>
-      <app-card [value]="'81'"
+      <app-card [value]="this.response.numberOfClicks.numberOfClicks"
          [label]="'Clicks'"
          [color]="'red'"></app-card>
 
    </div>
    <div>
-      <app-card [value]="'99'"
+      <app-card [value]="this.response.totalImpressions.impression"
          [label]="'Impressions'"
          [color]="'blue'"></app-card>
 
@@ -68,14 +68,15 @@
          [color]="'pink'"></app-card>
    </div>
    <div>
-      <app-card [value]="'534.9'"
+      <app-card [value]="this.response.totalCost.cost | number:'1.0-0'"
          [label]="'Cost'"
          [color]="'green'"></app-card>
 
    </div>
 
 </div>
-<div class="flex justify-content-center">
+<div class="flex justify-content-center"
+   #graphContainer>
    <canvas baseChart
       width="670"
       height="400"
@@ -84,4 +85,10 @@
       [options]="lineChartOptions"
       [legend]="lineChartLegend">
    </canvas>
+</div>
+<div class="center-button">
+   <button mat-raised-button
+      color="primary"
+      (click)="captureGraphAsPDF()">Save Graph as PDF</button>
+
 </div>
