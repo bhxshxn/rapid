@@ -63,18 +63,19 @@
 
       </div>
       <div>
-         <app-card [value]="response?.totalImpressions?.impression"
+         <app-card
+            [value]="response?.totalImpressions?.impression!==undefined ? response?.totalImpressions?.impression :'N/A'"
             [label]="'Impressions'"
             [color]="'blue'"></app-card>
 
       </div>
       <div>
-         <app-card [value]="'5.42'"
+         <app-card [value]="response?.totalCost?.avg_cost ? (response?.totalCost?.avg_cost | number:'1.0-0'):'N/A'"
             [label]="'Avg. CPC'"
             [color]="'pink'"></app-card>
       </div>
       <div>
-         <app-card [value]="response?.totalCost?.cost | number:'1.0-0'"
+         <app-card [value]="response?.totalCost?.cost?(response?.totalCost?.cost | number:'1.0-0'):'N/A'"
             [label]="'Cost'"
             [color]="'green'"></app-card>
 
