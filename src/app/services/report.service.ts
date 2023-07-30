@@ -22,12 +22,20 @@ export class ReportService {
       private http: HttpClient,
       private errorHandlerService: ErrorHandlerService,
    ) {}
-   getReport(startDate: any, endDate: any, adType?, adId?): Observable<any> {
-      console.log(`${this.url}?start_date=${startDate}&end_date=${endDate}`);
+   getReport(
+      startDate: any,
+      endDate: any,
+      adType = 'magazine_image',
+      adId?,
+   ): Observable<any> {
       return this.http
-         .get<any>(this.url + `?start_date=${startDate}&end_date=${endDate}`, {
-            responseType: 'json',
-         })
+         .get<any>(
+            this.url +
+               `?start_date=${startDate}&end_date=${endDate}&ad_type=${adType}`,
+            {
+               responseType: 'json',
+            },
+         )
          .pipe(
             catchError(
                this.errorHandlerService.handleError<any>('fetchById', []),

@@ -11,6 +11,7 @@ import jsPDF from 'jspdf';
 import * as moment from 'moment';
 
 import { ReportService } from '../../services/report.service';
+import { AdvertisementService } from 'src/app/services/advertisement.service';
 
 interface Ads {
    name: string;
@@ -34,81 +35,18 @@ export class ReportComponent implements OnInit {
    };
 
    response: any;
-   ads: Ads[] = [
-      { name: 'ad1' },
-      { name: 'ad2' },
-      { name: 'ad3' },
-      { name: 'ad4' },
-   ];
+   ads: Ads[] = [];
    adsControl = new FormControl('All'); // Set the default ad type to "All"
    date = new FormControl(new Date());
    todayDate = new Date().toISOString().slice(0, 10);
    startDateControl = new FormControl();
    endDateControl = new FormControl();
-   constructor(private fb: FormBuilder, private reportService: ReportService) {}
+   constructor(
+      private fb: FormBuilder,
+      private reportService: ReportService,
+      private advertisement: AdvertisementService,
+   ) {}
    ngOnInit() {
-      // this.response = {
-      //    numberOfClicks: {
-      //       numberOfClicks: 2,
-      //       avg_cost: 5.699999809265137,
-      //    },
-      //    totalImpressions: {
-      //       impression: 2,
-      //    },
-      //    totalCost: {
-      //       cost: 11.399999618530273,
-      //       avg_cost: 5.699999809265137,
-      //    },
-      //    clickedCount: [
-      //       {
-      //          id: 2,
-      //          cost: 39.89999866485596,
-      //          ad_id: 11,
-      //          ad_type: 'custom_video',
-      //          is_clicked: 1,
-      //          created_at: '2023-04-16T14:50:34.000Z',
-      //          avg_cost: 5.699999809265137,
-      //       },
-      //       {
-      //          id: 17,
-      //          cost: 399.39999198913574,
-      //          ad_id: 50,
-      //          ad_type: 'custom_video',
-      //          is_clicked: 1,
-      //          created_at: '2023-05-07T12:10:43.000Z',
-      //          avg_cost: 5.397297189042375,
-      //       },
-      //    ],
-      //    impressions: [
-      //       {
-      //          id: 1,
-      //          cost: 34.19999885559082,
-      //          ad_id: 11,
-      //          ad_type: 'custom_video',
-      //          is_clicked: 0,
-      //          created_at: '2023-04-16T14:34:50.000Z',
-      //          avg_cost: 5.699999809265137,
-      //       },
-      //       {
-      //          id: 14,
-      //          cost: 11.399999618530273,
-      //          ad_id: 50,
-      //          ad_type: 'custom_video',
-      //          is_clicked: 0,
-      //          created_at: '2023-05-03T15:41:49.000Z',
-      //          avg_cost: 5.699999809265137,
-      //       },
-      //       {
-      //          id: 16,
-      //          cost: 489.2999906539917,
-      //          ad_id: 50,
-      //          ad_type: 'custom_video',
-      //          is_clicked: 0,
-      //          created_at: '2023-05-07T12:10:38.000Z',
-      //          avg_cost: 5.376922974219689,
-      //       },
-      //    ],
-      // };
       const startDate = this.todayDate;
       const endDate = this.todayDate;
       const adType = this.adsControl.value;
@@ -117,7 +55,6 @@ export class ReportComponent implements OnInit {
             this.response = data;
 
             // Update the chart data with the fetched response
-            console.log('Reponse', this.response);
             const filteredClickedCount = this.response.clickedCount.map(
                item => {
                   return Math.round(item.cost);
@@ -184,6 +121,9 @@ export class ReportComponent implements OnInit {
             // Handle the error here
          },
       );
+      this.getAdType().subscribe(data => {
+         this.ads = data.data;
+      });
    }
 
    captureGraphAsPDF() {
@@ -216,20 +156,22 @@ export class ReportComponent implements OnInit {
    getReportData(startDate: any, endDate: any, adType: string) {
       return this.reportService.getReport(startDate, endDate, adType);
    }
+   getAdType() {
+      return this.advertisement.fetchAll();
+   }
    onFilterChange() {
       const startDate = moment(this.startDateControl.value).format(
          'YYYY-MM-DD',
       );
       const endDate = moment(this.endDateControl.value).format('YYYY-MM-DD');
       const adType = this.adsControl.value;
-      console.log('Start', startDate, 'End', endDate);
+      console.log(adType);
       // Call getReportData and directly assign the response to the response variable
       this.getReportData(startDate, endDate, adType).subscribe(
          data => {
             this.response = data;
 
             // Update the chart data with the fetched response
-            console.log('Reponse', this.response);
             const filteredClickedCount = this.response.clickedCount.map(
                item => {
                   return Math.round(item.cost);
