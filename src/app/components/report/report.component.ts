@@ -60,12 +60,12 @@ export class ReportComponent implements OnInit {
             // Update the chart data with the fetched response
             const filteredClickedCount = this.response.clickedCount.map(
                item => {
-                  return Math.round(item.cost);
+                  return Math.round(item.numberOfClicks);
                },
             );
             const filteredImpressionsCount = this.response.impressions.map(
                item => {
-                  return Math.round(item.cost);
+                  return Math.round(item.impression);
                },
             );
 
@@ -80,7 +80,7 @@ export class ReportComponent implements OnInit {
                },
             );
             const mergeCreated = [
-               ...filteredClickedCreated,
+               // ...filteredClickedCreated,
                ...filteredImpressionsCreated,
             ];
             const formattedDates = mergeCreated.map(date =>
