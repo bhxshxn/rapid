@@ -1,5 +1,7 @@
 .flex {
    display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
 }
 
 .justify-content-center {
@@ -33,27 +35,37 @@
 }
 
 .gap {
-   gap: 25px;
+   gap: 1rem;
 }
 
 .container {
-   padding-right: 15px;
-   padding-left: 15px;
-   margin-right: auto;
-   margin-left: auto;
+   display: flex;
+   flex-direction: column;
 }
 
 .mt-3 {
-   margin-top: 25px;
+   margin-top: 2rem;
 }
 
+/* Responsive styles for center-button */
 .center-button {
    display: flex;
    justify-content: center;
-   align-items: center;
-   height: 100%;
-   margin-bottom: 50px;
-   /* Ensure the button fills the entire height if necessary */
+   margin-top: 1rem;
+}
+
+#graphContainer {
+   padding: 1rem;
+}
+
+/* Responsive styles for card portion */
+.flex.justify-content-center.gap.mt-3 {
+   margin-top: 2rem !important;
+}
+
+/* Responsive styles for the chart */
+.flex.justify-content-center canvas {
+   max-width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -70,6 +82,6 @@
 
 @media (min-width: 1200px) {
    .container {
-      width: 860px;
+      min-width: 90%;
    }
 }

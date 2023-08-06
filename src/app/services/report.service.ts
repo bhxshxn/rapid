@@ -22,16 +22,13 @@ export class ReportService {
       private http: HttpClient,
       private errorHandlerService: ErrorHandlerService,
    ) {}
-   getReport(
-      startDate: any,
-      endDate: any,
-      adType = 'magazine_image',
-      adId?,
-   ): Observable<any> {
+   getReport(startDate: any, endDate: any, adId?: any): Observable<any> {
       return this.http
          .get<any>(
             this.url +
-               `?start_date=${startDate}&end_date=${endDate}&ad_type=${adType}`,
+               `?start_date=${startDate}&end_date=${endDate}${
+                  adId ? `&ad_id=${adId}` : ''
+               }`,
             {
                responseType: 'json',
             },

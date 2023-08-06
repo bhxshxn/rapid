@@ -39,18 +39,21 @@ export class ReportComponent implements OnInit {
    adsControl = new FormControl('All'); // Set the default ad type to "All"
    date = new FormControl(new Date());
    todayDate = new Date().toISOString().slice(0, 10);
-   startDateControl = new FormControl();
-   endDateControl = new FormControl();
+   startDate = new Date(new Date().setMonth(new Date().getMonth() - 1))
+      .toISOString()
+      .slice(0, 10);
+
+   endDate = this.todayDate;
+   startDateControl = new FormControl(this.startDate);
+   endDateControl = new FormControl(this.endDate);
    constructor(
       private fb: FormBuilder,
       private reportService: ReportService,
       private advertisement: AdvertisementService,
    ) {}
    ngOnInit() {
-      const startDate = this.todayDate;
-      const endDate = this.todayDate;
-      const adType = this.adsControl.value;
-      this.getReportData(startDate, endDate, adType).subscribe(
+      const adId = this.adsControl.value;
+      this.getReportData(this.startDate, this.endDate).subscribe(
          data => {
             this.response = data;
 
@@ -145,29 +148,23 @@ export class ReportComponent implements OnInit {
          pdf.save('graph.pdf');
       });
    }
-   // getReportData(startDate: any, endDate: any, adType: string) {
-   //    this.reportService
-   //       .getReport(startDate, endDate, adType)
-   //       .subscribe(data => {
-   //          this.response = data;
-   //          // The rest of your code for updating the chart data based on the response...
-   //       });
-   // }
-   getReportData(startDate: any, endDate: any, adType: string) {
-      return this.reportService.getReport(startDate, endDate, adType);
+
+   getReportData(startDate: any, endDate: any, adId?: string) {
+      return this.reportService.getReport(startDate, endDate, adId);
    }
+
    getAdType() {
       return this.advertisement.fetchAll();
    }
+
    onFilterChange() {
       const startDate = moment(this.startDateControl.value).format(
          'YYYY-MM-DD',
       );
       const endDate = moment(this.endDateControl.value).format('YYYY-MM-DD');
-      const adType = this.adsControl.value;
-      console.log(adType);
+      const adId = this.adsControl.value;
       // Call getReportData and directly assign the response to the response variable
-      this.getReportData(startDate, endDate, adType).subscribe(
+      this.getReportData(startDate, endDate, adId).subscribe(
          data => {
             this.response = data;
 
@@ -182,13 +179,12 @@ export class ReportComponent implements OnInit {
                   return Math.round(item.cost);
                },
             );
-
             const filteredClickedCreated = this.response.clickedCount.map(
                item => {
                   return item.created_at;
                },
             );
-            const filteredImpressionsCreated = this.response.clickedCount.map(
+            const filteredImpressionsCreated = this.response.impressions.map(
                item => {
                   return item.created_at;
                },
@@ -206,7 +202,7 @@ export class ReportComponent implements OnInit {
 
             // Step 3: Convert Set back to an array
             const uniqueDatesArray = Array.from(uniqueDatesSet);
-
+            console.log(uniqueDatesArray);
             this.lineChartData = {
                labels: uniqueDatesArray,
                datasets: [
