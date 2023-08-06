@@ -53,80 +53,79 @@ export class ReportComponent implements OnInit {
    ) {}
    ngOnInit() {
       const adId = this.adsControl.value;
-      this.getReportData(this.startDate, this.endDate).subscribe(
-         data => {
-            this.response = data;
+      this.getReportData(this.startDate, this.endDate).subscribe(data => {
+         this.response = data;
 
-            // Update the chart data with the fetched response
-            const filteredClickedCount = this.response.clickedCount.map(
-               item => {
-                  return Math.round(item.numberOfClicks);
-               },
-            );
-            const filteredImpressionsCount = this.response.impressions.map(
-               item => {
-                  return Math.round(item.impression);
-               },
-            );
+         // Update the chart data with the fetched response
+         //    const filteredClickedCount = this.response.clickedCount.map(
+         //       item => {
+         //          return Math.round(item.numberOfClicks);
+         //       },
+         //    );
+         //    const filteredImpressionsCount = this.response.impressions.map(
+         //       item => {
+         //          return Math.round(item.impression);
+         //       },
+         //    );
 
-            const filteredClickedCreated = this.response.clickedCount.map(
-               item => {
-                  return item.created_at;
-               },
-            );
-            const filteredImpressionsCreated = this.response.clickedCount.map(
-               item => {
-                  return item.created_at;
-               },
-            );
-            const mergeCreated = [
-               // ...filteredClickedCreated,
-               ...filteredImpressionsCreated,
-            ];
-            const formattedDates = mergeCreated.map(date =>
-               new Date(date).toISOString().slice(0, 10),
-            );
+         //    const filteredClickedCreated = this.response.clickedCount.map(
+         //       item => {
+         //          return item.created_at;
+         //       },
+         //    );
+         //    const filteredImpressionsCreated = this.response.clickedCount.map(
+         //       item => {
+         //          return item.created_at;
+         //       },
+         //    );
+         //    const mergeCreated = [
+         //       // ...filteredClickedCreated,
+         //       ...filteredImpressionsCreated,
+         //    ];
+         //    const formattedDates = mergeCreated.map(date =>
+         //       new Date(date).toISOString().slice(0, 10),
+         //    );
 
-            // Step 2: Remove duplicates using Set
-            const uniqueDatesSet = new Set(formattedDates);
+         //    // Step 2: Remove duplicates using Set
+         //    const uniqueDatesSet = new Set(formattedDates);
 
-            // Step 3: Convert Set back to an array
-            const uniqueDatesArray = Array.from(uniqueDatesSet);
+         //    // Step 3: Convert Set back to an array
+         //    const uniqueDatesArray = Array.from(uniqueDatesSet);
 
-            this.lineChartData = {
-               labels: uniqueDatesArray,
-               datasets: [
-                  {
-                     data: filteredImpressionsCount,
-                     label: 'Impressions',
-                     fill: true,
-                     tension: 0,
-                     borderColor: 'red',
-                     backgroundColor: 'rgba(255,0,0,0)',
-                  },
-                  {
-                     data: filteredClickedCount,
-                     label: 'Clicks',
-                     fill: true,
-                     tension: 0,
-                     borderColor: 'green',
-                     backgroundColor: 'rgba(0,0,0,0)',
-                  },
-               ],
-            };
-            this.lineChartOptions = {
-               responsive: false,
-            };
+         //    this.lineChartData = {
+         //       labels: uniqueDatesArray,
+         //       datasets: [
+         //          {
+         //             data: filteredImpressionsCount,
+         //             label: 'Impressions',
+         //             fill: true,
+         //             tension: 0,
+         //             borderColor: 'red',
+         //             backgroundColor: 'rgba(255,0,0,0)',
+         //          },
+         //          {
+         //             data: filteredClickedCount,
+         //             label: 'Clicks',
+         //             fill: true,
+         //             tension: 0,
+         //             borderColor: 'green',
+         //             backgroundColor: 'rgba(0,0,0,0)',
+         //          },
+         //       ],
+         //    };
+         //    this.lineChartOptions = {
+         //       responsive: false,
+         //    };
 
-            this.lineChartLegend = true;
-         },
-         error => {
-            // Handle the error here
-         },
-      );
+         //    this.lineChartLegend = true;
+         // },
+         // error => {
+         //    // Handle the error here
+      });
       this.getAdType().subscribe(data => {
          this.ads = data.data;
       });
+      this.onFilterChange();
    }
 
    captureGraphAsPDF() {
@@ -190,7 +189,7 @@ export class ReportComponent implements OnInit {
                },
             );
             const mergeCreated = [
-               ...filteredClickedCreated,
+               // ...filteredClickedCreated,
                ...filteredImpressionsCreated,
             ];
             const formattedDates = mergeCreated.map(date =>
